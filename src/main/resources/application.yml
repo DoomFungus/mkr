@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://ec2-46-137-188-105.eu-west-1.compute.amazonaws.com:5432/d8fbmi7oedmob4
+    driver-class-name: org.postgresql.Driver
+    password: 7785666323e10b60c18a9d3799ec084e4025b7841507ccc249e44822129de1aa
+    username: jyljyvdrkimrwa
+server:
+  port: 80
