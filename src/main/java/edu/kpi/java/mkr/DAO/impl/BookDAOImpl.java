@@ -43,6 +43,11 @@ public class BookDAOImpl implements BookDAO {
             "LIMIT ?\n" +
             "OFFSET ?";
 
+    private final static String GET_BOOK_BY_ID = "SELECT b.book_id, b.book_name, s.series_name, b.series_index, b.creation_date\n" +
+            "FROM book b\n" +
+            "LEFT JOIN series s on b.series_id = s.series_id\n" +
+            "WHERE b.book_id = ?";
+
     @Override
     public List<Book> getAllPermittedBooks(int userId, Number limit, Number offset) {
         return jdbcTemplate.query(GET_ALL_PERMITTED_BOOKS, new Object[]{userId, limit, offset}, new BookMapper());
@@ -51,5 +56,10 @@ public class BookDAOImpl implements BookDAO {
     @Override
     public List<Book> getUserBooks(int userId, Number limit, Number offset) {
         return jdbcTemplate.query(GET_ALL_BOOKS_BY_USER, new Object[]{userId, limit, offset}, new BookMapper());
+    }
+
+    @Override
+    public Book getBook(Number id) {
+        return jdbcTemplate.queryForObject(GET_BOOK_BY_ID, new Object[]{id}, new BookMapper());
     }
 }

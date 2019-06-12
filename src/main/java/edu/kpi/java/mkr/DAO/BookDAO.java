@@ -8,4 +8,6 @@ public interface BookDAO {
     List<Book>  getAllPermittedBooks(int userId, Number limit, Number offset);
 
     List<Book> getUserBooks(int userId, Number limit, Number offset);
+
+    Book getBook(Number id);
 }

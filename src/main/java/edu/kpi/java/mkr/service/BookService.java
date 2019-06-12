@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface BookService {
     List<Book> getAllBooks(Number limit, Number offset);
+    Book getBook(Number id);
 }

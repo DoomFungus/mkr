@@ -3,10 +3,7 @@ package edu.kpi.java.mkr.controller;
 import edu.kpi.java.mkr.controller.DTO.BookDetailsDTO;
 import edu.kpi.java.mkr.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,5 +24,10 @@ public class BookController {
                 .stream()
                 .map(BookDetailsDTO::from)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/{id}")
+    public BookDetailsDTO getBook(@PathVariable("id") Number id){
+        return BookDetailsDTO.from(bookService.getBook(id));
     }
 }

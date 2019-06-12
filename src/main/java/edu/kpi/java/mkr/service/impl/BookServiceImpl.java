@@ -18,6 +18,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book getBook(Number id) {
+        return bookDAO.getBook(id);
+    }
+
+    @Override
     public List<Book> getAllBooks(Number limit, Number offset) {
         return bookDAO.getAllPermittedBooks(2, limit, offset);
     }
