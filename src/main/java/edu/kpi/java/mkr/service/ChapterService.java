@@ -10,4 +10,6 @@ public interface ChapterService {
     Chapter getChapterWithText(Number chapterId);
 
     Chapter getCurrentChapter(Number bookId);
+
+    void setCurrentChapter(Number chapterId);
 }

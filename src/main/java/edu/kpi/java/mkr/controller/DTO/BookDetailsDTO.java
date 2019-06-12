@@ -21,8 +21,6 @@ public class BookDetailsDTO {
     private int seriesIndex;
     @JsonProperty("authors")
     private List<AuthorDTO> authors;
-    @JsonProperty("creation_date")
-    private LocalDate creationDate;
 
     public static BookDetailsDTO from(Book book){
         BookDetailsDTO res = new BookDetailsDTO();
@@ -38,7 +36,6 @@ public class BookDetailsDTO {
                     .map(AuthorDTO::from)
                     .collect(Collectors.toList()));
         }
-        res.setCreationDate(book.getCreationDate());
         return res;
     }
 }

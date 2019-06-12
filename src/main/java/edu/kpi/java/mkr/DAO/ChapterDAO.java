@@ -10,4 +10,6 @@ public interface ChapterDAO {
     Chapter getChapterWithText(Number chapterId);
 
     Chapter getCurrentChapter(Number bookId, Number userId);
+
+    void setCurrentChapter(Number chapterId, Number userId);
 }

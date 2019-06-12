@@ -12,8 +12,6 @@ public class FullChapterDTO {
     private int chapterNumber;
     @JsonProperty("chapter_text")
     private String chapterText;
-    @JsonProperty("book_id")
-    private int bookId;
 
     public static FullChapterDTO from(Chapter chapter){
         FullChapterDTO res = new FullChapterDTO();
@@ -21,7 +19,6 @@ public class FullChapterDTO {
         res.chapterName = chapter.getChapterName();
         res.chapterNumber = chapter.getChapterNumber();
         res.chapterText = chapter.getChapterText();
-        res.bookId = chapter.getBook().getBookId();
         return res;
     }
 }

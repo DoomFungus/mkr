@@ -12,15 +12,13 @@ public class ChapterDetailsDTO {
     private String chapterName;
     @JsonProperty("number")
     private int chapterNumber;
-    @JsonProperty("book_id")
-    private int bookId;
+
 
     public static ChapterDetailsDTO from(Chapter chapter){
         ChapterDetailsDTO res = new ChapterDetailsDTO();
         res.chapterId = chapter.getChapterId();
         res.chapterName = chapter.getChapterName();
         res.chapterNumber = chapter.getChapterNumber();
-        res.bookId = chapter.getBook().getBookId();
         return res;
     }
 }

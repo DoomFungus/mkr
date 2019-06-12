@@ -3,6 +3,7 @@ package edu.kpi.java.mkr.controller;
 import edu.kpi.java.mkr.controller.DTO.ChapterDetailsDTO;
 import edu.kpi.java.mkr.controller.DTO.FullChapterDTO;
 import edu.kpi.java.mkr.service.ChapterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,10 @@ public class ChapterController {
 
     private ChapterService chapterService;
 
+    @Autowired
+    public ChapterController(ChapterService chapterService) {
+        this.chapterService = chapterService;
+    }
 
     @GetMapping
     public List<ChapterDetailsDTO> getChaptersByBook(@RequestParam("book_id") Number bookId){
@@ -28,5 +33,10 @@ public class ChapterController {
     @GetMapping("/current")
     public FullChapterDTO getCurrentChapter(@RequestParam("book_id") Number bookId){
         return FullChapterDTO.from(chapterService.getCurrentChapter(bookId));
+    }
+
+    @PostMapping("/current")
+    public void setCurrentChapter(@RequestParam("chapter_id") Number chapterId){
+        chapterService.setCurrentChapter(chapterId);
     }
 }
