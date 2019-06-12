@@ -15,11 +15,9 @@ public class BookDAOImpl implements BookDAO {
 
     @Autowired
     public BookDAOImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
     private final static String GET_ALL_PERMITTED_BOOKS ="SELECT b.book_id, b.book_name, s.series_name, b.series_index, b.creation_date\n" +

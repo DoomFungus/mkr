@@ -8,4 +8,6 @@ public interface ChapterDAO {
     List<Chapter> getChaptersByBook(Number bookId);
 
     Chapter getChapterWithText(Number chapterId);
+
+    Chapter getCurrentChapter(Number bookId, Number userId);
 }

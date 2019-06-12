@@ -9,7 +9,7 @@ public class ChapterDetailsDTO {
     @JsonProperty("id")
     private int chapterId;
     @JsonProperty("name")
-    private int chapterName;
+    private String chapterName;
     @JsonProperty("number")
     private int chapterNumber;
     @JsonProperty("book_id")
