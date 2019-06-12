@@ -1,8 +1,6 @@
 package edu.kpi.java.mkr.controller.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import edu.kpi.java.mkr.model.Author;
-import edu.kpi.java.mkr.model.Region;
 import edu.kpi.java.mkr.model.User;
 
 import java.util.List;
@@ -20,7 +18,7 @@ public class UserDTO {
     public static UserDTO from(User user){
         UserDTO res = new UserDTO();
         res.userId = user.getUserId();
-        res.userName = user.getUserName();
+        res.userName = user.getUsername();
         res.region = RegionDTO.from(user.getRegion());
         res.roles = user.getRoles();
         return res;

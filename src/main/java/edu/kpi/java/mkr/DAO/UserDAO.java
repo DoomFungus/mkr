@@ -8,4 +8,8 @@ public interface UserDAO {
     List<User> findAllUsers(Number limit, Number offset);
 
     User findUser(Number userId);
+
+    User findUser(String userName);
+
+    void createUser(User user);
 }

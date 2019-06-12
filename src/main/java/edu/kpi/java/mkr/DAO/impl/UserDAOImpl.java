@@ -2,6 +2,7 @@ package edu.kpi.java.mkr.DAO.impl;
 
 import edu.kpi.java.mkr.DAO.UserDAO;
 import edu.kpi.java.mkr.DAO.mapper.UserMapper;
+import edu.kpi.java.mkr.DAO.mapper.UserWithPasswordMapper;
 import edu.kpi.java.mkr.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,6 +12,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +47,16 @@ public class UserDAOImpl implements UserDAO {
             "JOIN role_a ra on ar.role_id = ra.role_id\n" +
             "WHERE ar.user_id IN (:ids)";
 
+    private static final String GET_USER_BY_USERNAME = "SELECT u.user_id, u.user_name, u.user_password\n" +
+            "FROM user_a u\n" +
+            "WHERE u.user_name = ?";
+
+    private static final String CREATE_USER = "INSERT INTO user_a(user_name, user_password, creation_date)" +
+            "values (?, ?, ?)";
+
+    private  static final String CREATE_USER_ROLE = "INSERT INTO assigned_role values ((SELECT user_id\n" +
+            "            FROM user_a\n" +
+            "            where user_name = ?), ?)";
     @Override
     public List<User> findAllUsers(Number limit, Number offset) {
         return attachRoles(jdbcTemplate
@@ -55,6 +67,18 @@ public class UserDAOImpl implements UserDAO {
     public User findUser(Number userId) {
         return attachRoles(jdbcTemplate
                 .queryForObject(GET_USER_BY_ID, new Object[]{userId}, new UserMapper()));
+    }
+
+
+    @Override
+    public User findUser(String userName) {
+        return attachRoles(jdbcTemplate.queryForObject(GET_USER_BY_USERNAME, new Object[]{userName}, new UserWithPasswordMapper()));
+    }
+
+    @Override
+    public void createUser(User user) {
+        jdbcTemplate.update(CREATE_USER, new Object[]{user.getUsername(), user.getPassword(), LocalDate.now()});
+        jdbcTemplate.update(CREATE_USER_ROLE, new Object[]{user.getUsername(), 1});
     }
 
     private List<User> attachRoles(List<User> users){
