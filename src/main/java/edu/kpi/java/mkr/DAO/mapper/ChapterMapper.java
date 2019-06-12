@@ -2,7 +2,6 @@ package edu.kpi.java.mkr.DAO.mapper;
 
 import edu.kpi.java.mkr.model.Book;
 import edu.kpi.java.mkr.model.Chapter;
-import edu.kpi.java.mkr.model.Series;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

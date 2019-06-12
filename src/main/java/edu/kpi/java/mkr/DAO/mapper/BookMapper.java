@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 public class BookMapper implements RowMapper<Book> {
     @Override
@@ -18,6 +19,7 @@ public class BookMapper implements RowMapper<Book> {
         b.setSeries(s);
         b.setSeriesIndex(resultSet.getInt(4));
         b.setCreationDate(resultSet.getDate(5).toLocalDate());
+        b.setAuthors(new LinkedList<>());
         return b;
     }
 }

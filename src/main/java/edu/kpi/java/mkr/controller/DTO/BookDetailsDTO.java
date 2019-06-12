@@ -19,8 +19,8 @@ public class BookDetailsDTO {
     private String seriesName;
     @JsonProperty("series_index")
     private int seriesIndex;
-    @JsonProperty("author_names")
-    private List<String> authorNames;
+    @JsonProperty("authors")
+    private List<AuthorDTO> authors;
     @JsonProperty("creation_date")
     private LocalDate creationDate;
 
@@ -33,9 +33,9 @@ public class BookDetailsDTO {
             res.setSeriesIndex(book.getSeriesIndex());
         }
         if(book.getAuthors() != null) {
-            res.setAuthorNames(book.getAuthors()
+            res.setAuthors(book.getAuthors()
                     .stream()
-                    .map(Author::getAuthorName)
+                    .map(AuthorDTO::from)
                     .collect(Collectors.toList()));
         }
         res.setCreationDate(book.getCreationDate());
