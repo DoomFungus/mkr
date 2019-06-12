@@ -24,4 +24,9 @@ public class ChapterController {
     public FullChapterDTO getChapterWithText(@PathVariable("id") Number id){
         return FullChapterDTO.from(chapterService.getChapterWithText(id));
     }
+
+    @GetMapping("/current")
+    public FullChapterDTO getCurrentChapter(@RequestParam("book_id") Number bookId){
+        return FullChapterDTO.from(chapterService.getCurrentChapter(bookId));
+    }
 }
