@@ -19,6 +19,7 @@ public class UserDTO {
         UserDTO res = new UserDTO();
         res.userId = user.getUserId();
         res.userName = user.getUsername();
+        if(res.region!=null)
         res.region = RegionDTO.from(user.getRegion());
         res.roles = user.getRoles();
         return res;

@@ -44,5 +44,9 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public String toString(){
+        return username;
+    }
 }
 

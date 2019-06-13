@@ -6,26 +6,24 @@ import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.List;
 
 @Component
 public class JWTProvider {
     private final static String jwtSecret = "TOP_SECRET";
     private final static long validityInMilliseconds = 3600000;
 
-    UserService userService;
+    private UserService userService;
 
     @Autowired
     public JWTProvider(UserService userService) {
         this.userService = userService;
     }
 
-    public String getUsername(String token){
+    private String getUsername(String token){
         return Jwts.parser().setSigningKey(jwtSecret)
                 .parseClaimsJws(token).getBody().getSubject();
     }
@@ -50,15 +48,11 @@ public class JWTProvider {
     }
 
     public String resolveToken(HttpServletRequest req) {
-        String bearerToken = req.getHeader("Authorization");
-        return bearerToken;
+        return req.getHeader("Authorization");
     }
 
     public boolean validateToken(String token) {
         Jws<Claims> claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
-        if (claims.getBody().getExpiration().before(new Date())) {
-            return false;
-        }
-        return true;
+        return !claims.getBody().getExpiration().before(new Date());
     }
 }

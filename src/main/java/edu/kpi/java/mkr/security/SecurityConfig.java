@@ -1,7 +1,6 @@
 package edu.kpi.java.mkr.security;
 
 import edu.kpi.java.mkr.service.UserService;
-import edu.kpi.java.mkr.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,8 +22,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    UserService userService;
-    JWTAuthFilter jwtAuthFilter;
+    private UserService userService;
+    private JWTAuthFilter jwtAuthFilter;
 
     @Autowired
     public SecurityConfig(UserService userService, JWTAuthFilter jwtAuthFilter) {

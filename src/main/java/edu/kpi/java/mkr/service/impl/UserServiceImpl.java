@@ -4,8 +4,8 @@ import edu.kpi.java.mkr.DAO.UserDAO;
 import edu.kpi.java.mkr.model.User;
 import edu.kpi.java.mkr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl  implements UserService  {
-    UserDAO userDAO;
+    private UserDAO userDAO;
 
     @Autowired
     public UserServiceImpl(UserDAO userDAO) {
@@ -33,6 +33,13 @@ public class UserServiceImpl  implements UserService  {
     @Override
     public User findUser(String userName) {
         return userDAO.findUser(userName);
+    }
+
+    @Override
+    public User findUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+
+        return findUser(username);
     }
 
     @Override

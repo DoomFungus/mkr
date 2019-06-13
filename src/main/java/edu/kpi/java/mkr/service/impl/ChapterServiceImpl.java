@@ -3,6 +3,7 @@ package edu.kpi.java.mkr.service.impl;
 import edu.kpi.java.mkr.DAO.ChapterDAO;
 import edu.kpi.java.mkr.model.Chapter;
 import edu.kpi.java.mkr.service.ChapterService;
+import edu.kpi.java.mkr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +11,13 @@ import java.util.List;
 
 @Service
 public class ChapterServiceImpl implements ChapterService {
-    ChapterDAO chapterDAO;
+    private ChapterDAO chapterDAO;
+    private UserService userService;
 
     @Autowired
-    public ChapterServiceImpl(ChapterDAO chapterDAO) {
+    public ChapterServiceImpl(ChapterDAO chapterDAO, UserService userService) {
         this.chapterDAO = chapterDAO;
+        this.userService = userService;
     }
 
     @Override
@@ -29,13 +32,13 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     public Chapter getCurrentChapter(Number bookId) {
-        int userId = 2;
+        int userId = userService.findUser().getUserId();
         return chapterDAO.getCurrentChapter(bookId, userId);
     }
 
     @Override
     public void setCurrentChapter(Number chapterId) {
-        int userId = 2;
+        int userId = userService.findUser().getUserId();
         chapterDAO.setCurrentChapter(chapterId, userId);
     }
 }
